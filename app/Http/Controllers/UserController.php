@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Http\Response;
 
 class UserController extends Controller{
 
@@ -11,14 +13,11 @@ class UserController extends Controller{
         $fields = $request->validate([
             'name' =>  'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string|confirmed',
+            'username' => 'required|string|unique:users,username'
         ]);
 
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => \bcrypt($fields['password']) 
-        ]);
+        $user = User::create($request->all());
 
         $token = $user->createToken('savagerytoken')->plainTextToken;
 
@@ -62,5 +61,22 @@ class UserController extends Controller{
         return [
             'message' => 'Session ended'
         ];
+    }
+
+    
+    public function search($username){
+
+        return User::where('username', 'like', '%'.$username.'%')->get();
+    }
+
+    public function update(Request $request, $id){
+
+        if(User::find($id)){
+            $user = User::find($id);
+            $user -> update($request->all());
+
+            return User::find($id);
+        }
+        return ['message' => 'Selected profile does not exist'];
     }
 }
