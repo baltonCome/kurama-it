@@ -11,7 +11,9 @@ class JobController extends Controller{
 
     public function index(){
 
-        return Job::orderBy('created_at', 'desc')->with(['user']);
+        $jobs = Job::orderBy('created_at', 'desc')->with(['user']);
+
+        return ['jobs' => $jobs];
     }
 
     public function show(Job $job){
@@ -27,13 +29,16 @@ class JobController extends Controller{
             'job-title' => 'required|string',
             'job-type' => 'required|string',
             'location' => 'required|string',
-            'salary' => 'required|float',
+            'salary' => 'required',
             'time-period' => 'required|string',
             'description' => 'required|string',
             'required-skills' => 'string',
         ]);
 
-        $job = Job::create($request->all());
+        $job = new Job($fields);
+        $job->user()->associate($request->user());
+        $job->save();
+        //$job = Job::create($request->all());
 
         return \response($job, 201);
     }
