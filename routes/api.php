@@ -7,9 +7,9 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\InterestController;
 
 /*
-|--------------------------------------------------------------------------
+|------------------------------------------------------------------------
 | API Routes
---------------------------------------------------------------------------
+-------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -21,6 +21,7 @@ use App\Http\Controllers\InterestController;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/profile/{username}', [UserController::class, 'search']);
+Route::get('/users/{user:username}/jobs', [UserController::class, 'index'])->name('users.show');
 
 Route::get('/', [JobController::class, 'index']);
 Route::get('/job/{title}', [JobController::class, 'search']);

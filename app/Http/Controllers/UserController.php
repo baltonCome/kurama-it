@@ -8,6 +8,17 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller{
 
+
+    public function index(User $user){
+
+        $jobs = $user->jobs()->with(['user', 'interests']);
+
+        return [
+            'user' =>$user,
+            'jobs' =>$jobs 
+        ];
+    }
+
     public function register (Request $request){
 
         $fields = $request->validate([
