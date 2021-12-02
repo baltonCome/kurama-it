@@ -23,7 +23,7 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/profile/{username}', [UserController::class, 'search']);
 
 Route::get('/', [JobController::class, 'index']);
-Route::get('/job/{jobs:job-title}', [JobController::class, 'search']);
+Route::get('/job/{title}', [JobController::class, 'search']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function (){
@@ -38,7 +38,6 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('jobs/{job}/interests',[InterestController::class, 'store'])->name('jobs.interests');
     Route::delete('jobs/{job}/interests',[InterestController::class, 'destroy'])->name('jobs.interests');
 });
-
 
 //Job parameter on InterestController - Refers to the job id of the user
 Route::middleware('auth:sanctum')->get('/user', function (Request $request){

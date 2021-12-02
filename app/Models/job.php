@@ -31,7 +31,7 @@ class job extends Model{
         return $this->hasMany(Interest::class);
     }
 
-    public function interested(){
+    public function interested(User $user){
 
         return $this->interests->contains('user_id', $user->id);
     }

@@ -14,7 +14,6 @@ class InterestController extends Controller{
             return response(null, 409);
         }
 
-
         return $job->interests() -> create([
             'user_id'=>$request->user()->id,
         ]);
