@@ -8,12 +8,13 @@ use App\Models\Job;
 
 class JobController extends Controller{
 
-
     public function index(){
 
         $jobs = Job::orderBy('created_at', 'desc')->with(['user']);
 
-        return ['jobs' => $jobs];
+        return [
+            'jobs' => $jobs
+        ];
     }
 
     public function show(Job $job){

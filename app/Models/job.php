@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class job extends Model{
 
-
     use HasFactory;
 
     protected $fillable = [
@@ -25,5 +24,15 @@ class job extends Model{
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    public function interests(){
+
+        return $this->hasMany(Interest::class);
+    }
+
+    public function interested(){
+
+        return $this->interests->contains('user_id', $user->id);
     }
 }

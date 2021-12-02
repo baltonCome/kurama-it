@@ -56,4 +56,14 @@ class User extends Authenticatable
 
         return $this->hasMany(Job::class);
     }
+
+    public function interests(){
+
+        return $this->hasMany(Interest::class);
+    }
+
+    public function receivedInterests(){
+
+        return $this->hasManyThrough(Interest::class, Job::class);
+    }
 }
