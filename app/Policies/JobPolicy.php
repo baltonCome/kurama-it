@@ -15,7 +15,7 @@ class JobPolicy{
      *
      * @return void
      */
-    public function delete(User $user, Job $job){
+    public function sameuser(User $user, Job $job){
 
         return $user->id === $job->user_id;
     }

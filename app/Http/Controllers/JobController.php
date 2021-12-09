@@ -51,7 +51,7 @@ class JobController extends Controller{
 
     public function update(Job $job){
 
-        $this->authorize('update', $job);
+        $this->authorize('sameuser', $job);
         $job -> update();
         
         return $job;
@@ -59,7 +59,7 @@ class JobController extends Controller{
 
     public function destroy(Job $job){
 
-        $this->authorize('delete', $job);
+        $this->authorize('sameuser', $job);
         $job->delete();
 
         return $job;
