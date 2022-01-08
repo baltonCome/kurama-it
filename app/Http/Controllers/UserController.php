@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller{
 
@@ -28,7 +29,12 @@ class UserController extends Controller{
             'username' => 'required|string|unique:users,username'
         ]);
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'password' => \bcrypt($fields['password']),
+            'username' => $fields['username'],
+        ]);
 
         $token = $user->createToken('savagerytoken')->plainTextToken;
 

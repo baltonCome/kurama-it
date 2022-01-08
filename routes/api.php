@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\InterestController;
 
@@ -17,13 +17,11 @@ use App\Http\Controllers\InterestController;
 |
 */
 
-
-
 //Public routes
-Route::post('/register', [UsuarioController::class, 'register']);
-Route::post('/login', [UsuarioController::class, 'login']);
-Route::get('/profile/{username}', [UsuarioController::class, 'search']);
-Route::get('/users/{user:username}/jobs', [UsuarioController::class, 'index'])->name('users.show');
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/profile/{username}', [UserController::class, 'search']);
+Route::get('/users/{user:username}/jobs', [UserController::class, 'index'])->name('users.show');
 
 Route::get('/', [JobController::class, 'index']);
 Route::get('/job/{title}', [JobController::class, 'search']);
@@ -31,8 +29,8 @@ Route::get('/job/{title}', [JobController::class, 'search']);
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function (){
 
-    Route::post('/logout', [UsuarioController::class, 'logout']);
-    Route::put('/update', [UsuarioController::class, 'update']);
+    Route::post('/logout', [UserController::class, 'logout']);
+    Route::put('/update/{id}', [UserController::class, 'update']);
 
     Route::post('/new-job', [JobController::class, 'store']);
     Route::put('/job/{id}', [JobController::class, 'update']);
