@@ -11,6 +11,13 @@ class InterestController extends Controller{
 
     public function store(Job $job, Request $request){
 
+        if($request->user()->id === $job->user_id){
+            return response(
+                ['message' => 'This action is unauthorized, user attemps to get interested in own post!'],
+                403
+            );
+        } 
+
         if($job->interested($request->user())){
 
             return response(null, 409);
@@ -24,7 +31,7 @@ class InterestController extends Controller{
             ->onlyTrashed()
             ->where('user_id', $request->user()->id)
             ->count()){
-            Mail::to($job->user)->send(new JobInterest(auth()->user(), $job));
+            //Mail::to($job->user)->send(new JobInterest(auth()->user(), $job));
         }
        
         return $response;
