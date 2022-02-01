@@ -10,10 +10,10 @@ class JobController extends Controller{
 
     public function index(){
 
-        $jobs = Job::orderBy('created_at', 'desc')->with(['user']);
+        $jobs = Job::orderBy('created_at', 'desc')->with(['user'])->limit(5)->get();
 
         return [
-            'jobs' => $jobs
+            'jobs' =>$jobs
         ];
     }
 
