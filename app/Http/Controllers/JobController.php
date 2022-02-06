@@ -10,7 +10,7 @@ class JobController extends Controller{
 
     public function index(){
 
-        $jobs = Job::orderBy('created_at', 'desc')->with(['user'])->limit(5)->get();
+        $jobs = Job::orderBy('created_at', 'desc')->with(['user'])->get();
 
         return [
             'jobs' =>$jobs
@@ -27,13 +27,13 @@ class JobController extends Controller{
     public function store(Request $request){
 
         $fields = $request->validate([
-            'job-title' => 'required|string',
-            'job-type' => 'required|string',
+            'title' => 'required|string',
+            'job_type' => 'required|string',
             'location' => 'required|string',
             'salary' => 'required',
-            'time-period' => 'required|string',
+            'time_period' => 'required|string',
             'description' => 'required|string',
-            'required-skills' => 'string',
+            'required_skills' => 'string',
         ]);
 
         $job = new Job($fields);
@@ -46,7 +46,7 @@ class JobController extends Controller{
 
     public function search($title){
 
-        return Job::where('job-title', 'like', '%'.$title.'%')->get();
+        return Job::where('title', 'like', '%'.$title.'%')->get();
     }
 
     public function update(Job $job){

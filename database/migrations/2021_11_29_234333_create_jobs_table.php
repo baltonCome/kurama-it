@@ -16,13 +16,13 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('job-title');
-            $table->string('job-type');
+            $table->string('title');
+            $table->string('job_type');
             $table->string('location');
             $table->float('salary');
-            $table->string('time-period');
+            $table->string('time_period');
             $table->text('description');
-            $table->text('required-skills')->nullable();
+            $table->text('required_skills')->nullable();
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class UserController extends Controller{
 
         return [
             'user' =>$user,
-            'jobs' =>$jobs 
+            'jobs' =>$jobs
         ];
     }
 

@@ -11,14 +11,14 @@ class job extends Model{
 
     protected $fillable = [
 
-        'job-title',
+        'title',
         'user_id',
-        'job-type',
+        'job_type',
         'location',
         'salary',
-        'time-period',
+        'time_period',
         'description',
-        'required-skills',
+        'required_skills',
     ];
 
     public function user(){
