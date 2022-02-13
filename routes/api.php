@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\InterestController;
+use App\Http\Controllers\FeedbackController;
 
 /*
 |------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/users/{user:username}/jobs', [UserController::class, 'index'])->nam
 Route::get('/', [JobController::class, 'index']);
 Route::get('/job/{title}', [JobController::class, 'search']);
 
+Route::get('/feedback', [FeedbackController::class, 'index']);
+
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function (){
 
@@ -38,6 +41,9 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     Route::post('jobs/{job}/interests',[InterestController::class, 'store'])->name('jobs.interests');
     Route::delete('jobs/{job}/interests',[InterestController::class, 'destroy'])->name('jobs.interests');
+
+    Route::post('/new-feedback', [FeedbackController::class, 'store']);
+    Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy']);
 });
 
 //Job parameter on InterestController - Refers to the job id of the user

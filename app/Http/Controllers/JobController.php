@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Job;
@@ -44,20 +45,23 @@ class JobController extends Controller{
         return \response($job, 201);
     }
 
-    public function search($title){
+    public function search($title){ 
 
         return Job::where('title', 'like', '%'.$title.'%')->get();
     }
 
-    public function update(Job $job){
+    public function update(Request $request, $id){
 
+        $job = Job::find($id);
         $this->authorize('sameuser', $job);
-        $job -> update();
+        $job -> update($request->all());
         
         return $job;
     }
 
-    public function destroy(Job $job){
+    public function destroy($id){
+
+        $job = Job::find($id);
 
         $this->authorize('sameuser', $job);
         $job->delete();

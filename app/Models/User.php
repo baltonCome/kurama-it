@@ -66,4 +66,9 @@ class User extends Authenticatable
 
         return $this->hasManyThrough(Interest::class, Job::class);
     }
+
+    public function Feedbacks(){
+
+        return $this->hasMany(Feedback::class);
+    }
 }
