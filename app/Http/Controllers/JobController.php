@@ -29,9 +29,12 @@ class JobController extends Controller{
 
         $fields = $request->validate([
             'title' => 'required|string',
+            'category' => 'required|string',
+            'subcategory' => 'required|string',
             'job_type' => 'required|string',
             'location' => 'required|string',
             'salary' => 'required',
+            'salaryPer' => 'required|string',
             'time_period' => 'required|string',
             'description' => 'required|string',
             'required_skills' => 'string',

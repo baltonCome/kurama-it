@@ -13,9 +13,12 @@ class job extends Model{
 
         'title',
         'user_id',
+        'category',
+        'subcategory',
         'job_type',
         'location',
         'salary',
+        'salaryPer',
         'time_period',
         'description',
         'required_skills',
