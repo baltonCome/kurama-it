@@ -10,7 +10,16 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller{
 
 
-    public function index(User $user){
+    public function index(){
+
+        $users = User::orderBy('created_at', 'desc')->get();
+
+        return [
+            'users' =>$users,
+        ];
+    }
+
+    public function userInterests(User $user){
 
         $jobs = $user->jobs()->with(['user', 'interests']);
 

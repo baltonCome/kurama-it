@@ -22,7 +22,8 @@ use App\Http\Controllers\FeedbackController;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/profile/{username}', [UserController::class, 'search']);
-Route::get('/users/{user:username}/jobs', [UserController::class, 'index'])->name('users.show');
+Route::get('/users/{user:username}/jobs', [UserController::class, 'userInterests'])->name('users.show');
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/', [JobController::class, 'index']);
 Route::get('/job/{title}', [JobController::class, 'search']);
