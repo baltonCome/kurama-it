@@ -55,6 +55,20 @@ class UserController extends Controller{
         return \response($response, 201);
     }
 
+    public function refresh(Request $request){
+
+        $user = $request->user();
+        $user->tokens()->delete();
+
+        $token = $user->createToken('savagerytoken')->plainTextToken;
+
+        $response = [
+            'token' => $token
+        ];
+        
+        return \response($response, 200);
+    }
+
     public function login (Request $request){
 
         $fields = $request->validate([
